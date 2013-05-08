@@ -57,7 +57,7 @@
         var rewrittenBindings = ko.expressionRewriting.preProcessBindings(bindingsString),
             functionBody = "with($context){with($data||{}){return{" + rewrittenBindings + "}}}";
         for (var i = 0; i < depth; i++)
-            functionBody = "with($context.$parents[" + i + "]){" + functionBody + "}";
+            functionBody = "with($context.$parents[" + i + "]||{})" + functionBody;
         return new Function("$context", "$element", functionBody);
     }
 })();
